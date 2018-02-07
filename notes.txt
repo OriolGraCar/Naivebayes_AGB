@@ -1,0 +1,5 @@
+remove >50%NA --> remove 7637 --> we now have 30190
+
+we used 55 samples for training in brain, so for testing: 2 nigra only.
+
+

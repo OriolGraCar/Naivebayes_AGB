@@ -34,12 +34,12 @@ def entropy(splicing_info):
 
 
 
-def calculate_MSI(input_file):
+def calculate_MSI(input_file,output_file):
 	START = True
 	tissue_list = []
 	different_tissue = set()
 	all_info = {}
-	result = {}
+	result = []
 	with open(input_file) as fl:
 		for line in fl:
 			line = line.rstrip()
@@ -64,12 +64,18 @@ def calculate_MSI(input_file):
 						continue
 					else:						
 						all_info[data[0]][data[i]][tissue_list[i-1]] += 1
-				result[data[0]] = entropy(all_info[data[0]])
+				result.append([data[0],entropy(all_info[data[0]])])
 
-	return result
+	with open(output_file,'w') as out:
+		for element in result.sort(key=lambda -x: x[1]):
+			out.writte("%s\t%s\n" % (element[0],element[1]))
+
+
+
 
 
 if __name__ == "__main__":
+	#testing
 	print(calculate_MSI('toymodel.psi'))
 
 

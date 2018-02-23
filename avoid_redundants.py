@@ -74,7 +74,17 @@ def select_splicings(matrix, info, splicings):
 
 	return matrix
 		
+def get_final_splicings(matrix):
+	splicings = set()
+	comparisions = list(matrix.keys())
+
+	for tup in comparisions:
+		for spl in tup:
+			splicings.add(spl)
+
+	return splicings
+
 
 tup = count_up_down("test2.txt")
 mat = construct_matrix(tup[0], tup[1])
-print(select_splicings(mat, tup[0], 5))
+print(get_final_splicings(select_splicings(mat, tup[0], 5)))

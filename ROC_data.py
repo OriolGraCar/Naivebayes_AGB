@@ -20,6 +20,7 @@ def calculate_PNrates(data, output_file):
 	data_list = data[0]
 	scores = data[1]
 	tissue = data[2]
+	ratios = []
 
 	out = open(output_file, "w")
 	out.write("Treshold\tFPR\tTPR\n")
@@ -49,6 +50,11 @@ def calculate_PNrates(data, output_file):
 		FPR = FP/N
 
 		out.write("%f\t%f\t%f\n" %(treshold, FPR, TPR))
+		ratios.append(((TPR/FPR)-1, treshold))
+
+	best = max(ratios, key=lambda x: x[0])
+	print(best)
+
 
 if __name__ == "__main__":
 

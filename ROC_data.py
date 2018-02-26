@@ -2,7 +2,7 @@ import argparse
 
 def read_scores(input_file):
 	data_list = []
-	scores = []
+	scores = set()
 	tissue = input_file.replace(".txt", "")
 
 	with open(input_file) as file:
@@ -12,7 +12,7 @@ def read_scores(input_file):
 			line = line.split("\t")
 
 			data_list.append((float(line[0]), line[1]))
-			scores.append(float(line[0]))
+			scores.add(float(line[0]))
 
 	return (data_list, scores, tissue)
 

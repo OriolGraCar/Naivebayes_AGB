@@ -1,0 +1,46 @@
+---
+title: "README"
+author: "Oriol Gracia, Júlia Mir, Helena Rodriguez"
+date: "February 26th, 2018"
+output: pdf_document
+---
+#Naive Bayes model to classify tissue types and brain regions using splicing patterns
+
+##Introduction
+We have created a program to use data from GTEX to predict the time of tissue a given sample comes from depending on whether some splicing events take place or not.  
+Here you can find an explanation for every program in our pipeline, in the same order they should be used.  
+
+##Pre-processing your data
+The first thing is to preprocess our data, which can be done using three different scripts:  
+  
+- **transforming_rawdata.py**: This first script allows you to transform GTEX IDs into more manageable IDs, like tissue names.  
+*Usage*: It needs three attributes, the GTEX header description (the new IDs), the GTEX input fie (your data), and the name of the output file.  
+  
+- **NA_processer.py**: This script allows you to analyse how many NA does your data have, how they are distributed among your splicing sites and, if you wish to, remove those with a higher ratio of NA.  
+*Usage*: It needs "-i output_file_from_the_previous_script", "-o output_prefix_name" (this program creates two or three outputs, this is the common part of the name) and, optionally, "-r NA_ratio_to_remove" (if provided, removes all splicing sites with that NA ratio or higher).  
+It also includes a -h help option.  
+  
+- **remove_column.py**: Finally, this script doesn't need to be used always. It is made in case you need to remove one of your sample tissue types (e.g., in case you do not have enough samples) (one columns per time).  
+*Usage*: It requires three arguments, input_file_name, output_file_name and columns_name_to_remove.  
+
+##Sampling
+Divide your data set into two separate sets, training and testing.  
+  
+- **Sampling.py**: Divides your data set into the two groups.  
+*Usage*: This script has four arguments: input_file (output from NA_processer or remove_column), output_file_training_set, output_file_testing_set, and number_of_samples (for training per tissue).  
+
+##Training and testing data
+- **Gtex_Loader.py**: It includes three functions to be used in further scripts, not used by the user. Transforms data so it can be used later.  
+  
+- **Splicing_analyzer.py**: Analyses the entropy and information gain (or mutual information). It also removes redundant splicing sites, and finally uses a function from Gtex_Loader to create a document with the final training data (with only the useful splicings).    
+*Usage*: It requires two arguments, input_file and output_file. It also uses the outputs from Gtex_Loader.py.  
+  
+- **Gtex_Naive_Bayes.py**: Calculates the algorithm and creates the Naive Bayes model. It allows you to use, or not, pseudo-counts; and to use a K-fold approach. For more information, see Quality assessment.  
+*Usage*: It requires  
+
+##Quality assessment
+- **Gtex_Naive_Bayes.py**: It calculates the number of correct and incorrect predictions per tissue type. 
+*Usage*: 
+  
+- **ROC_data.py**: Calculates the TPR and FPR per tissue or in total. Returns data in an R-friendly format.   
+*Usage*: It requires an input_file, which can be a list of N file names (output from Gtex_Naive_Bayes.py). The file name MUST be the name of the tissue.  

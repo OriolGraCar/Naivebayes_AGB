@@ -33,23 +33,23 @@ def count_corrects_tissue(input_file, output_file):
 		#prints corrects
 		for tissue in tissue_order:
 			if first:
-				out.write(tissues_dict[tissue]['correct'])
+				out.write(str(tissues_dict[tissue]['correct']))
 				first = False
 			else:
-				out.write("\t%s" % tissues_dict[tissue]['correct'])
+				out.write("\t%s" % str(tissues_dict[tissue]['correct']))
 
 		out.write("\n")
 		first = True
 		#prints incorrects
 		for tissue in tissue_order:
 			if first:
-				out.write(tissues_dict[tissue]['incorrect'])
+				out.write(str(tissues_dict[tissue]['incorrect']))
 				first = False
 			else:
-				out.write("\t%s" % tissues_dict[tissue]['incorrect'])
+				out.write("\t%s" % str(tissues_dict[tissue]['incorrect']))
 
 
 
-
+count_corrects_tissue("predictions.txt", "corr_inc_data.txt")
 
 

@@ -7,7 +7,7 @@ output: pdf_document
 #Naive Bayes model to classify tissue types and brain regions using splicing patterns
 
 ##Introduction
-We have created a program to use data from GTEX to predict the time of tissue a given sample comes from depending on whether some splicing events take place or not.  
+We have created a package to use data from GTEX to predict the time of tissue a given sample comes from depending on whether some splicing events take place or not.  
 Here you can find an explanation for every program in our pipeline, in the same order they should be used.  
 
 ##Pre-processing your data
@@ -27,7 +27,7 @@ It also includes a -h help option.
 Divide your data set into two separate sets, training and testing.  
   
 - **Sampling.py**: Divides your data set into the two groups.  
-*Usage*: This script has four arguments: input_file (output from NA_processer or remove_column), output_file_training_set, output_file_testing_set, and number_of_samples (for training per tissue).  
+*Usage*: This script has four arguments: -i input_file (output from NA_processer or remove_column), -t output_file_training_set, -s output_file_testing_set, and -z number_of_elements (for training per tissue). If you provide a higher -z than tissue types, it will raise and error.  
 
 ##Training and testing data
 - **Gtex_Loader.py**: It includes three functions to be used in further scripts, not used by the user. Transforms data so it can be used later.  

@@ -1,5 +1,11 @@
 
 def Gtex_load(input_file):
+	"""
+	Function that loads an Splicing Gtex File and loads it in a dictionary of dictionarys.
+	Then returns a set with the different tissues and the diccionari.
+	The dictionary has the splicing events as keys and another dictionary as value with the events up, down and NA as keys and
+	another dictionary as value. This last dictionary has the tissues as keys and the times that the tissue had been found with the given event as value.
+	"""
 	START = True
 	tissue_list = []
 	different_tissue = set()
@@ -30,6 +36,9 @@ def Gtex_load(input_file):
 	return all_info, tissue_list
 
 def load_user_data(input_file):
+    """
+	Loads the sample data in a dictionary with the different tissues as keys and the splicing events as values.
+    """
     START = True
     header_order = []
     user_info = {}
@@ -54,6 +63,11 @@ def load_user_data(input_file):
 
 
 def filter_data(input_file,to_filter):
+	"""
+	Function that takes as arguments one file and the desired splicing events,
+	and produces another file with only those events. 
+	The file has the same name as the original file but with the prefix Filtered_
+	"""
 	START = True
 	output_name = "Filtered_" + input_file
 	with open(input_file) as fl:

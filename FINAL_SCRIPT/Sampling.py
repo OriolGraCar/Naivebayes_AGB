@@ -1,6 +1,11 @@
 import random
 import argparse
 def random_sampling(input_file,output_train,output_sample,number):
+	"""
+	Function that makes a random sample of the gtex data.
+	It allways makes uniform training sets, the number parameter is the
+	number of times that each tissue will appear in the training set.
+	"""
 	header_flag = True
 	data_holder = {}
 	ids_list = []

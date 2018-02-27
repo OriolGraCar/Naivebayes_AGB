@@ -58,7 +58,7 @@ def thresholds(tissue_list, all_atributes, user_data, output_prefix):
 
     #iterates over user data and prints in each file the score to be it
     for sample in user_data:
-        realname = sample.split("*")
+        realname = key.split("*")
         val_dict = score_all(tissue_list, all_atributes,user_data[sample])
         for tissue in val_dict:
             files[tissue].write("\n%s\t%s" % (val_dict[tissue],realname[0]))

@@ -34,7 +34,7 @@ def accumulative_NA(input_file, output_file):
         out.write("%s\t%d\n" %(data[0], value))
 
 def remove_na(input_file,output_file,to_remove):
-    """Removes the splicing sites that have more than the decidided ration of NAs."""
+    """Removes the splicing sites that have more than the decidided ratio of NAs."""
     count = 0
     output_file = output_file + ".txt"
     with open(input_file) as fl:

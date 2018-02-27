@@ -1,10 +1,14 @@
 import math
 import sys
 import copy
-import argparse
 import operator
 
 def entropy(splicing_info):
+	"""
+	Function that calculates the MI of one splicing.
+	This function is not mean to be used alone.
+	It assumes uniform training sets, so the H(s) is always max, so its not calculated.
+	"""
 	total_tissues = len(splicing_info['up'])
 	prob_up = 0
 	prob_down = 0
@@ -36,6 +40,9 @@ def entropy(splicing_info):
 	return -(summatory_up + summatory_down)
 
 def calculate_MSI(all_info, number, output_file = None):
+	"""
+	Function that calculates the MI of each splicing and returns the "number" best ones.
+	"""
 	to_send = {}
 	result = [(splicing,entropy(val)) for splicing,val in all_info.items()]
 	result = sorted(result, key = lambda x: x[1])
@@ -51,6 +58,9 @@ def calculate_MSI(all_info, number, output_file = None):
 	return to_send
 
 def construct_matrix(info, tissues):
+	"""
+	Function that makes a matrix with the similiraties of each splicing event.
+	"""
 	splicings = list(info.keys())
 	vals = ["up", "down"]
 	tissues = set(tissues)
@@ -70,6 +80,9 @@ def construct_matrix(info, tissues):
 	return matrix
 
 def select_splicings(matrix, info, splicings):
+	"""
+	Function that given a matrix of similarities returns the best non redundant ones.
+	"""
 	list_delete = []
 	comparisions = (splicings*splicings)/2-splicings/2
 
@@ -88,6 +101,9 @@ def select_splicings(matrix, info, splicings):
 	return matrix
 
 def get_final_splicings(matrix):
+	"""
+	Function that given a matrix with the best splicings returns a list of the best splicing events.
+	"""
 	splicings = set()
 	comparisions = list(matrix.keys())
 
@@ -99,6 +115,8 @@ def get_final_splicings(matrix):
 
 
 if __name__ == "__main__":
+
+	import argparse
 
 	parser = argparse.ArgumentParser(description="Script that selects the best splicings.")
 

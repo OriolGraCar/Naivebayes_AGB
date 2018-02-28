@@ -4,6 +4,15 @@ import operator
 
 
 def training(all_info, different_tissue, pseudo=False):
+	"""
+	Function that trains the model, it can use pseudocounts or not
+	It uses as input:
+	all_info: dictionary with all the information of the Training Data
+	different_tissue: set of diferents tissues
+	pseudo: boolean to use pseudocounts or not
+	Returns:
+	A dict with all the conditional probabilities for each splicing event
+	"""
 
     # check if the data has 0 counts and raise error
     for splice in all_info:
@@ -28,6 +37,16 @@ def training(all_info, different_tissue, pseudo=False):
 
 
 def score_all(tissue_list, all_atributes, user_tissue):
+	"""
+	This function is not meant to be used alone, its calle dby other functions.
+	It gives the probability that each tissue is the sample
+	Takes as arguments:
+	all_atributes: dictionary with all the information of the trained model
+	different_tissue: set of diferents tissues
+	user_tissue: One sample of the User data
+	Returns:
+	A dict with the tissues as keys, and the probability of that sample beign the tissue as values.
+	"""
     val_dict = {}
     total = 0
     for tissue in tissue_list:
@@ -49,6 +68,15 @@ def score_all(tissue_list, all_atributes, user_tissue):
     return val_dict
 
 def thresholds(tissue_list, all_atributes, user_data, output_prefix):
+	"""
+	Function that creates files to make the roc curves.
+	Generates one file per tissue, and adds the score for each sample.
+	Takes as arguments:
+	all_atributes: dictionary with all the information of the trained model
+	tissue_list: set of diferents tissues
+	user_data: dict with the data of the user
+	output_prefix: Prefix used to make the files
+	"""
     #open all the required files
     files = {}
     for tissue in tissue_list:
@@ -69,6 +97,16 @@ def thresholds(tissue_list, all_atributes, user_data, output_prefix):
 
 
 def predict(output_file,tissue_list, all_atributes, user_data, threshold_dict, scoring = False):
+	"""
+	Function that makes the predicition of the user data.
+	Takes as arguments:
+	all_atributes: dictionary with all the information of the trained model
+	tissue_list: set of diferents tissues
+	user_data: dict with the data of the user
+	output_file: name of the file with the predictions
+	threshold_dict: if defined uses the threshold provided to make the prediction instead of the max
+	scoring: Default False. If enabled, shows the correct guesses, incorrect guesses and the ratio. (for testing the model only)
+	"""
     correct = 0
     incorrect = 0
     out_file = open(output_file,"w")
@@ -115,8 +153,6 @@ def predict(output_file,tissue_list, all_atributes, user_data, threshold_dict, s
         print("The Number of incorrect guesses are: %s" % incorrect)
         print("The correct ratio is %s" % (correct/(correct+incorrect)))
 
-    if scoring == 'k-fold':
-        return correct, incorrect
 
 
 

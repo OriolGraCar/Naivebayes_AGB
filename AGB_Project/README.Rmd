@@ -55,10 +55,10 @@ shown.
 
 To run the provided R script you need the following packages:
 
--
--
--
--
+- ggplot2  
+- reshape  
+- scales  
+- lattice  
 
 ## 3. Pipeline
 

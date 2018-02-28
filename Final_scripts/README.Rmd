@@ -8,6 +8,8 @@ output: pdf_document
 
 ##Introduction
 
+All the code is written in Python 3
+
 We have created a package to use data from GTEX to predict the type of tissue from a given sample based on whether the splicing events take place or not.
 
 Here you can find a brief explanation of every program in our pipeline, in the same order in which they should be used, and also some examples.

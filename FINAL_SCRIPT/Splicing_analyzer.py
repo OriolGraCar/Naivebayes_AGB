@@ -145,6 +145,11 @@ if __name__ == "__main__":
                 required=True,
                 type=int,
                 help="Number of non redundant splicing sites.")
+	parser.add_argument('-t', '--testing_file',
+				dest="testing",
+				action="store",
+				required=True,
+				help="Input testing file name.")
 
 	options = parser.parse_args()
 
@@ -159,6 +164,7 @@ if __name__ == "__main__":
 		print("Splicing %s Selected." % ids)
 
 	Gtex_Loader.filter_data(input_file,final_ids)
+	Gtex_Loader.filter_data(options.testing,final_ids)
 	exit(0)
 
 

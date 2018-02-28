@@ -61,7 +61,10 @@ def score_all(tissue_list, all_atributes, user_tissue):
 
     #normalize the results
     for tissue in val_dict:
-    	val_dict[tissue] = val_dict[tissue]/total
+        if total != 0:
+            val_dict[tissue] = val_dict[tissue]/total
+        else:
+            val_dict[tissue] = 0
 
 
 

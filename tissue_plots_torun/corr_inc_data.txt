@@ -1,0 +1,3 @@
+Heart_-_Atrial_Appendage	Lung	Muscle_-_Skeletal	Nerve_-_Tibial	Heart_-_Left_Ventricle	Liver
+80	84	87	85	74	88
+8	4	1	3	14	0
